@@ -1,6 +1,7 @@
 const express = require('express');
 const cors = require('cors');
 const { serverPort } = require('./config');
+const contentRoutes = require('./routes/v1/content');
 
 const app = express();
 
@@ -8,6 +9,8 @@ app.use(express.json());
 app.use(cors());
 
 app.get('/', (req, res) => res.send({ msg: 'Server is running' }));
+
+app.use('/v1/content/', contentRoutes);
 
 // Routes go here
 

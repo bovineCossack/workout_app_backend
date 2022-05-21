@@ -1,4 +1,5 @@
-require("dotenv").config();
+/* eslint-disable indent */
+require('dotenv').config();
 
 module.exports = {
     mysqlConfig: {

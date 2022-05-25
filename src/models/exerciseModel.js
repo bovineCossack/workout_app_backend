@@ -18,7 +18,22 @@ async function exerciseIndex() {
     }
 }
 
+async function getSingleExerciseDb(id) {
+    let conn;
+    try {
+        conn = await mysql.createConnection(dbConfig);
+        const sql = 'SELECT * FROM exercises WHERE exercise_id = ?';
+        const [exercises] = await conn.execute(sql, [id]);
+        return exercises;
+    } catch (error) {
+        console.log('getSingleExerciseDb', error);
+        return false;
+    } finally {
+        await conn.close();
+    }
+}
+
 module.exports = {
     exerciseIndex,
-
+    getSingleExerciseDb,
 }

@@ -9,12 +9,14 @@ async function exerciseIndex(req, res) {
     res.json(exercise);
 }
 async function singleExercise(req, res) {
-    const singleExerciseData = await exerciseModel.getSingleExerciseDb(req.params.id);
-    if (singleExerciseData === false) {
+    const { exId } = req.params;
+    const [singleEx] = await exerciseModel.getSingleExerciseDb(exId);
+
+    if (singleEx === false) {
         res.status(500);
         return;
     }
-    res.json(singleExerciseData);
+    res.json(singleEx);
 }
 
 module.exports = {

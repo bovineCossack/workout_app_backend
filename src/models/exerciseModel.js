@@ -36,4 +36,4 @@ async function getSingleExerciseDb(id) {
 module.exports = {
     exerciseIndex,
     getSingleExerciseDb,
-}
+};

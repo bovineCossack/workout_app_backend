@@ -22,4 +22,4 @@ async function singleExercise(req, res) {
 module.exports = {
     exerciseIndex,
     singleExercise,
-}
+};

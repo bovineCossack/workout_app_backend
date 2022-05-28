@@ -30,7 +30,21 @@ async function insertExerciseToDb(newExerciseData) {
     }
 }
 
+async function deleteSingleExerciseDb(id) {
+    try {
+        const conn = await mysql.createConnection(mysqlConfig);
+        const sql = 'DELETE FROM exercises WHERE id = ? LIMIT 1';
+        const [deleteResult] = await conn.execute(sql, [id]);
+        await conn.end();
+        return deleteResult;
+    } catch (error) {
+        console.log('deleteSingleExerciseDb ===', error);
+        return false;
+    }
+}
+
 module.exports = {
     getExerciseDb,
     insertExerciseToDb,
+    deleteSingleExerciseDb,
 };

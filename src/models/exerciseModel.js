@@ -1,10 +1,10 @@
 const mysql = require('mysql2/promise');
-const dbConfig = require('../config');
+const mysqlConfig = require('../config');
 
 async function exerciseIndex() {
     let conn;
     try {
-        conn = await mysql.createConnection(dbConfig);
+        conn = await mysql.createConnection(mysqlConfig);
         const sql = 'SELECT * FROM exercises';
         const [exercises] = await conn.query(sql);
         console.log('b4 return exercises');
@@ -21,7 +21,7 @@ async function exerciseIndex() {
 async function getSingleExerciseDb(id) {
     let conn;
     try {
-        conn = await mysql.createConnection(dbConfig);
+        conn = await mysql.createConnection(mysqlConfig);
         const sql = 'SELECT * FROM exercises WHERE exercise_id = ?';
         const [exercises] = await conn.execute(sql, [id]);
         return exercises;

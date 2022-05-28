@@ -1,39 +1,20 @@
 const mysql = require('mysql2/promise');
 const mysqlConfig = require('../config');
 
-async function exerciseIndex() {
-    let conn;
+async function getExerciseDb() {
     try {
-        conn = await mysql.createConnection(mysqlConfig);
+        const conn = await mysql.createConnection(mysqlConfig);
         const sql = 'SELECT * FROM exercises';
-        const [exercises] = await conn.query(sql);
-        console.log('b4 return exercises');
-        return exercises;
+        const [rows] = await conn.execute(sql);
+        await conn.end();
+        return rows;
     } catch (error) {
-        console.log('exerciseIndex error', error);
+        console.log('getExerciseDb ===', error);
         return false;
-    } finally {
-        console.log('finally');
-        await conn.close();
     }
 }
 
-async function getSingleExerciseDb(id) {
-    let conn;
-    try {
-        conn = await mysql.createConnection(mysqlConfig);
-        const sql = 'SELECT * FROM exercises WHERE exercise_id = ?';
-        const [exercises] = await conn.execute(sql, [id]);
-        return exercises;
-    } catch (error) {
-        console.log('getSingleExerciseDb', error);
-        return false;
-    } finally {
-        await conn.close();
-    }
-}
 
 module.exports = {
-    exerciseIndex,
-    getSingleExerciseDb,
+    getExerciseDb,
 };

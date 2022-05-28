@@ -2,6 +2,7 @@ const express = require('express');
 const cors = require('cors');
 const morgan = require('morgan');
 const { serverPort } = require('./config');
+const { exerciseRoutes } = require('./routes/v1/exerciseRoutes');
 
 const app = express();
 
@@ -12,9 +13,10 @@ app.use(express.json());
 app.get('/', (req, res) => res.send({ msg: 'Server is running' }));
 
 // Routes go here
-const exRoutes = require('./routes/v1/exerciseRoutes');
+const authRoutes = require('./routes/v1/authRoutes');
 
-app.use('/v1/exercises', exRoutes);
+app.use('/v1', exerciseRoutes);
+app.use('/v1/auth/', authRoutes);
 
 app.all('*', (req, res) => res.status(404).send({ err: 'Page not found' }));
 

@@ -1,14 +1,18 @@
-/* eslint-disable indent */
 require('dotenv').config();
 
+const mysqlConfig = {
+    database: process.env.DB_DB,
+    host: process.env.DB_HOST,
+    user: process.env.DB_USER,
+    password: process.env.DB_PASS,
+    port: process.env.DB_PORT,
+};
+const serverPort = process.env.PORT || 8080;
+
+const jwtSecret = process.env.JWT_SECRET;
+
 module.exports = {
-    mysqlConfig: {
-        host: process.env.MYSQL_HOST,
-        user: process.env.MYSQL_USER,
-        password: process.env.MYSQL_PASS,
-        database: process.env.MYSQL_DB,
-        port: process.env.MYSQL_PORT,
-    },
-    serverPort: process.env.PORT || 8080,
-    jwtSecret: process.env.JWT_SECRET,
+    mysqlConfig,
+    serverPort,
+    jwtSecret,
 };

@@ -1,9 +1,10 @@
 const express = require('express');
-const exControl = require('../../controllers/exerciseController');
+const exerciseController = require('../../controllers/exerciseController');
 
-const exRoutes = express.Router();
+const exerciseRoutes = express.Router();
 
-exRoutes.get('/', exControl.exerciseIndex);
-exRoutes.get('/:exId', exControl.singleExercise);
+exerciseRoutes.get('/exercises', exerciseController.exerciseIndex);
 
-module.exports = exRoutes;
+module.exports = {
+    exerciseRoutes,
+};

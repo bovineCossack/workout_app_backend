@@ -16,7 +16,7 @@ app.get('/', (req, res) => res.send({ msg: 'Server is running' }));
 const authRoutes = require('./routes/v1/authRoutes');
 
 app.use('/v1', exerciseRoutes);
-app.use('/v1/auth/', authRoutes);
+app.use('/v1/auth', authRoutes);
 
 app.all('*', (req, res) => res.status(404).send({ err: 'Page not found' }));
 

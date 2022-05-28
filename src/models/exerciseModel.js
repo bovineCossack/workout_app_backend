@@ -14,7 +14,23 @@ async function getExerciseDb() {
     }
 }
 
+async function insertExerciseToDb(newExerciseData) {
+    try {
+        const conn = await mysql.createConnection(mysqlConfig);
+        const sql = 'INSERT INTO exercises (name, category1, category2) VALUES (?,?,?)';
+        const { name, category1, category2 } = newExerciseData;
+        const [insertResult] = await conn.execute(sql, [
+            name, category1, category2,
+        ]);
+        await conn.end();
+        return insertResult;
+    } catch (error) {
+        console.log('Error inserting data', error);
+        res.status(500).send('Error in insertExerciseToDb');
+    }
+}
 
 module.exports = {
     getExerciseDb,
+    insertExerciseToDb,
 };

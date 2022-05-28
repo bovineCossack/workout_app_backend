@@ -1,23 +1,26 @@
-const { getExerciseDb } = require('../models/exerciseModel');
+const { getExerciseDb, insertExerciseToDb } = require('../models/exerciseModel');
 const { failResponse, successResponse } = require('../tools/responseHelper');
 
-// async function exerciseIndex(req, res) {
-//     const exercise = await exerciseModel.getExerciseDb();
-//     if (exercise === false) {
-//         res.status(500);
-//         return;
-//     }
-//     res.json(exercise);
-// }
 
 async function exerciseIndex(req, res) {
-    const foundProducts = await getExerciseDb();
-    return foundProducts === false
+    const foundExercises = await getExerciseDb();
+    return foundExercises === false
         ? failResponse(res)
-        : successResponse(res, foundProducts);
+        : successResponse(res, foundExercises);
 }
 
+async function createExercise(req, res) {
+    const newExerciseData = req.body;
+    const { name, category1, category2 } = newExerciseData;
+    const exerciseResult = await insertExerciseToDb(newExerciseData);
+    if (exerciseResult === false) {
+        res.status(500);
+        return;
+    }
+    res.json(exerciseResult);
+}
 
 module.exports = {
     exerciseIndex,
+    createExercise,
 };

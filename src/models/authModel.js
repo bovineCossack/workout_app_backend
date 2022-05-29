@@ -4,7 +4,13 @@ const mysqlConfig = require('../config');
 
 async function insertUser(email, pass) {
     try {
-        const conn = await mysql.createConnection(mysqlConfig);
+        const conn = await mysql.createConnection({
+            host: process.env.DB_HOST,
+            database: process.env.DB_DB,
+            user: process.env.DB_USER,
+            password: process.env.DB_PASS,
+            port: process.env.DB_PORT,
+        });
         const sql = `
     INSERT INTO users (email,password)
     VALUES (?,?)
@@ -19,7 +25,13 @@ async function insertUser(email, pass) {
 }
 async function findUserByEmail(email) {
     try {
-        const conn = await mysql.createConnection(mysqlConfig);
+        const conn = await mysql.createConnection({
+            host: process.env.DB_HOST,
+            database: process.env.DB_DB,
+            user: process.env.DB_USER,
+            password: process.env.DB_PASS,
+            port: process.env.DB_PORT,
+        });
         const sql = `
     SELECT * FROM users
     WHERE email = ?

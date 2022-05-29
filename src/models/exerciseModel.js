@@ -3,7 +3,13 @@ const mysqlConfig = require('../config');
 
 async function getExerciseDb() {
     try {
-        const conn = await mysql.createConnection(mysqlConfig);
+        const conn = await mysql.createConnection({
+            host: process.env.DB_HOST,
+            database: process.env.DB_DB,
+            user: process.env.DB_USER,
+            password: process.env.DB_PASS,
+            port: process.env.DB_PORT,
+        });
         const sql = 'SELECT * FROM exercises';
         const [rows] = await conn.execute(sql);
         await conn.end();

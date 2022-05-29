@@ -22,7 +22,13 @@ async function getExerciseDb() {
 
 async function insertExerciseToDb(newExerciseData) {
     try {
-        const conn = await mysql.createConnection(mysqlConfig);
+        const conn = await mysql.createConnection({
+            host: process.env.DB_HOST,
+            database: process.env.DB_DB,
+            user: process.env.DB_USER,
+            password: process.env.DB_PASS,
+            port: process.env.DB_PORT,
+        });
         const sql = 'INSERT INTO exercises (name, category1, category2) VALUES (?,?,?)';
         const { name, category1, category2 } = newExerciseData;
         const [insertResult] = await conn.execute(sql, [
@@ -38,7 +44,13 @@ async function insertExerciseToDb(newExerciseData) {
 
 async function deleteSingleExerciseDb(id) {
     try {
-        const conn = await mysql.createConnection(mysqlConfig);
+        const conn = await mysql.createConnection({
+            host: process.env.DB_HOST,
+            database: process.env.DB_DB,
+            user: process.env.DB_USER,
+            password: process.env.DB_PASS,
+            port: process.env.DB_PORT,
+        });
         const sql = 'DELETE FROM exercises WHERE id = ? LIMIT 1';
         const [deleteResult] = await conn.execute(sql, [id]);
         await conn.end();

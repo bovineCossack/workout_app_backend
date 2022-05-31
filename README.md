@@ -33,3 +33,4 @@
 - bcryptjs, joi, jsonwebtoken for password cryptography, user validation, tokens
 - Postman for route and CRUD testing
 - AirBnB style linting
+Link to project front-end: https://github.com/bovineCossack/workout_app

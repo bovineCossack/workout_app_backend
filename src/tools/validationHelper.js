@@ -1,6 +1,8 @@
 const Joi = require('joi');
+const jwt = require('jsonwebtoken');
 const { failResponse } = require('./responseHelper');
 const { verifyJwtToken } = require('./verificationHelper');
+const { jwtSecret } = require('../config');
 
 async function validateUser(req, res, next) {
     const schema = Joi.object({
@@ -22,18 +24,33 @@ async function validateUser(req, res, next) {
 }
 
 async function validateToken(req, res, next) {
-    const authHeaders = req.headers.authorization;
-    const tokenGotFromUser = authHeaders && authHeaders.split(' ')[1];
-    console.log('tokenGotFromUser ===', tokenGotFromUser);
-    if (!tokenGotFromUser) return failResponse(res, 'no token', 401);
+    const authHeader = req.headers.authorization;
+    const tokenGotFromUser =
+        authHeader && authHeader.split(' ')[1];
+    if (!tokenGotFromUser) {
+        return failResponse(res, 'token not found', 401);
+    }
     const verifyResult = verifyJwtToken(tokenGotFromUser);
-    if (verifyResult === false) return failResponse(res, 'invalid token', 403);
-    console.log('verifyResult ===', verifyResult);
+    if (verifyResult === false) {
+        return failResponse(res, 'invalid token', 403);
+    }
     req.userId = verifyResult.id;
     next();
+}
+
+async function isLoggedIn(req, res, next) {
+    try {
+        const token = req.headers.authorization?.split(' ')[1];
+        req.token = jwt.verify(token, jwtSecret);
+        next();
+    } catch (error) {
+        res.status(401).send({ error: 'invalid token' });
+    }
 }
 
 module.exports = {
     validateUser,
     validateToken,
+    isLoggedIn,
+
 };

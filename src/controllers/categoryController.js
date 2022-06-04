@@ -1,4 +1,4 @@
-const getCategoryDb = require('../models/categoryModel');
+const { getCategoryDb } = require('../models/categoryModel');
 const { failResponse, successResponse } = require('../tools/responseHelper');
 
 async function categoryIndex(req, res) {

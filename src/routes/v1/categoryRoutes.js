@@ -1,6 +1,6 @@
 const express = require('express');
-const { isLoggedIn } = require('../../tools/validationHelper');
 const categoryController = require('../../controllers/categoryController');
+const { isLoggedIn } = require('../../tools/validationHelper');
 
 const categoryRoutes = express.Router();
 

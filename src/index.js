@@ -2,6 +2,9 @@ const express = require('express');
 const cors = require('cors');
 const morgan = require('morgan');
 const { serverPort } = require('./config');
+const authRoutes = require('./routes/v1/authRoutes');
+const { exerciseRoutes } = require('./routes/v1/exerciseRoutes');
+const { categoryRoutes } = require('./routes/v1/categoryRoutes');
 
 const app = express();
 
@@ -12,13 +15,10 @@ app.use(express.json());
 app.get('/', (req, res) => res.send({ msg: 'Server is running' }));
 
 // Routes
-const { exerciseRoutes } = require('./routes/v1/exerciseRoutes');
-const authRoutes = require('./routes/v1/authRoutes');
-const { categoryRoutes } = require('./routes/v1/categoryRoutes');
 
 app.use('/v1', exerciseRoutes);
 app.use('/v1/auth', authRoutes);
-app.use('/v1/categories', categoryRoutes);
+app.use('/v1', categoryRoutes);
 
 app.all('*', (req, res) => res.status(404).send({ err: 'Page not found' }));
 

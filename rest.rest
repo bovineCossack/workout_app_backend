@@ -10,4 +10,4 @@ Content-Type: application/json
 
 GET http://localhost:8080/v1/categories
 Content-Type: application/json
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MiwiaWF0IjoxNjU0MzY4OTIxLCJleHAiOjE2NTQzODY5MjF9.W3EHMM232THi8C0i4QismRJd0w8GUO2c_42pdBEKP-4
+Authorization: Bearer 

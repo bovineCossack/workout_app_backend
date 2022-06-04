@@ -14,9 +14,11 @@ app.get('/', (req, res) => res.send({ msg: 'Server is running' }));
 // Routes
 const { exerciseRoutes } = require('./routes/v1/exerciseRoutes');
 const authRoutes = require('./routes/v1/authRoutes');
+const { categoryRoutes } = require('./routes/v1/categoryRoutes');
 
 app.use('/v1', exerciseRoutes);
 app.use('/v1/auth', authRoutes);
+app.use('/v1/categories', categoryRoutes);
 
 app.all('*', (req, res) => res.status(404).send({ err: 'Page not found' }));
 

@@ -11,6 +11,7 @@
 - POST register
 - POST login
 - GET exercise list
+- GET muscle group list
 - DELETE exercise
 - password hashing and validation
 - login tokens
@@ -20,18 +21,13 @@
 - database and host info is not properly exported, using workaround to enter environment info in function
 
 ## Planned Functionality:
-
-- proper category management with own routes
 - workout plan routes
-
-
 
 ## Created using:
 
-- AWS RDS database for MYSQL DB storage
 - NodeJS, Express, Morgan, MySQL2, CORS
 - bcryptjs, joi, jsonwebtoken for password cryptography, user validation, tokens
-- Postman for route and CRUD testing
+- Postman + REST API for route and CRUD testing
 - AirBnB style linting
 ### Made by T.S. for TypeScript5 @ CodeAcademy
 Link to project front-end: https://github.com/bovineCossack/workout_app

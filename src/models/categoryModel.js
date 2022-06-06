@@ -14,7 +14,6 @@ async function getCategoryDb() {
         await conn.end();
         return rows;
     } catch (error) {
-        console.log('getCategoryDb ===', error);
         return false;
     }
 }

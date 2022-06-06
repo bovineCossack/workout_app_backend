@@ -14,7 +14,6 @@ async function getExerciseDb() {
         await conn.end();
         return rows;
     } catch (error) {
-        console.log('getExerciseDb ===', error);
         return false;
     }
 }
@@ -36,7 +35,6 @@ async function insertExerciseToDb(newExerciseData) {
         await conn.end();
         return insertResult;
     } catch (error) {
-        console.log('Error inserting data', error);
         res.status(500).send('Error in insertExerciseToDb');
     }
 }
@@ -55,7 +53,6 @@ async function deleteSingleExerciseDb(id) {
         await conn.end();
         return deleteResult;
     } catch (error) {
-        console.log('deleteSingleExerciseDb ===', error);
         return false;
     }
 }

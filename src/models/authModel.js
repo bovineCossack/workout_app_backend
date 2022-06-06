@@ -19,7 +19,6 @@ async function insertUser(email, pass) {
         await conn.end();
         return insertResult;
     } catch (error) {
-        console.log('insertUser ===', error);
         return false;
     }
 }
@@ -40,7 +39,6 @@ async function findUserByEmail(email) {
         await conn.end();
         return userFoundResult;
     } catch (error) {
-        console.log('findUserByEmail ===', error);
         return false;
     }
 }
